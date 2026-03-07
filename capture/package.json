@@ -1,0 +1,22 @@
+{
+  "name": "@openbrain/capture",
+  "version": "1.0.0",
+  "description": "Universal knowledge capture — embed, extract metadata, dedup-upsert into a pgvector store",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["capture", "knowledge-base", "pgvector", "embeddings", "dedup"],
+  "peerDependencies": {
+    "pg": ">=8"
+  }
+}

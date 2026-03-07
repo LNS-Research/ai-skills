@@ -1,0 +1,26 @@
+{
+  "name": "@openbrain/hybrid-search",
+  "version": "1.0.0",
+  "description": "Hybrid semantic + keyword search over a pgvector Postgres store using Reciprocal Rank Fusion",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["pgvector", "semantic-search", "hybrid-search", "rrf", "postgres", "embeddings"],
+  "peerDependencies": {
+    "pg": ">=8"
+  },
+  "devDependencies": {
+    "@types/pg": "^8",
+    "typescript": "^5"
+  }
+}

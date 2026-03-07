@@ -1,0 +1,23 @@
+{
+  "name": "@openbrain/email-draft",
+  "version": "1.0.0",
+  "description": "Push email drafts to Gmail Drafts folder (via API) or Apple Mail Drafts (via JXA). macOS only for Apple Mail.",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["gmail", "apple-mail", "email", "drafts", "jxa", "macos"],
+  "peerDependencies": {
+    "googleapis": ">=140"
+  },
+  "os": ["darwin", "linux"]
+}

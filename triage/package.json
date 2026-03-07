@@ -1,0 +1,22 @@
+{
+  "name": "@openbrain/triage",
+  "version": "1.0.0",
+  "description": "AI email triage — classify emails as dispatch/prep/yours/skip, draft responses, learn noise rules",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["email", "triage", "ai", "classification", "claude", "haiku", "inbox-zero"],
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}

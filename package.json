@@ -1,0 +1,15 @@
+{
+  "name": "@lns/ai-skills",
+  "private": true,
+  "workspaces": [
+    "hybrid-search",
+    "triage",
+    "capture",
+    "ai-router",
+    "email-draft"
+  ],
+  "scripts": {
+    "build": "npm run build --workspaces",
+    "typecheck": "npm run build --workspaces --if-present"
+  }
+}
