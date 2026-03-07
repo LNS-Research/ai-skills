@@ -13,6 +13,9 @@ All packages are **config-driven** — no hardcoded credentials, personal data, 
 | [`capture`](capture/) | Universal knowledge capture — embed + extract metadata + dedup-upsert into pgvector |
 | [`ai-router`](ai-router/) | Model routing — Haiku (fast), Sonnet (reasoning), Ollama local with Haiku fallback |
 | [`email-draft`](email-draft/) | Push drafts to Gmail Drafts (API) or Apple Mail Drafts (JXA) — macOS |
+| [`action-items`](action-items/) | Extract structured action items from transcripts, docs, and messages using Claude |
+| [`conversation-memory`](conversation-memory/) | Cross-session AI memory — extract durable facts and inject into future prompts |
+| [`channel-formatter`](channel-formatter/) | Format AI Markdown for Telegram, Slack, Teams, SMS — zero dependencies |
 
 ## Quick start
 

@@ -6,7 +6,10 @@
     "triage",
     "capture",
     "ai-router",
-    "email-draft"
+    "email-draft",
+    "action-items",
+    "conversation-memory",
+    "channel-formatter"
   ],
   "scripts": {
     "build": "npm run build --workspaces",

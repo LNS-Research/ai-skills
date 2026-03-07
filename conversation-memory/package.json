@@ -1,0 +1,22 @@
+{
+  "name": "@openbrain/conversation-memory",
+  "version": "1.0.0",
+  "description": "Cross-session AI conversation memory — extract durable facts and inject into future prompts",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["memory", "conversation", "ai", "claude", "haiku", "context", "facts", "cross-session"],
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}
