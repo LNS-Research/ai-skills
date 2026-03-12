@@ -1,0 +1,25 @@
+{
+  "name": "@openbrain/pptx-slides",
+  "version": "1.0.0",
+  "description": "Extract per-slide text and structured metadata from PPTX files — generic, configurable, no external API calls",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["pptx", "powerpoint", "slides", "extract", "parse", "office", "research"],
+  "dependencies": {
+    "fflate": "^0.8"
+  },
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}

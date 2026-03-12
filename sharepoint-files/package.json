@@ -1,0 +1,22 @@
+{
+  "name": "@openbrain/sharepoint-files",
+  "version": "1.0.0",
+  "description": "M365 SharePoint file access via Microsoft Graph API — auth, drive discovery, file listing, download, and text extraction",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.js",
+      "types": "./dist/index.d.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch"
+  },
+  "keywords": ["sharepoint", "m365", "microsoft-graph", "office365", "files", "sync", "pptx", "docx"],
+  "devDependencies": {
+    "typescript": "^5"
+  }
+}

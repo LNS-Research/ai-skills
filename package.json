@@ -9,7 +9,11 @@
     "email-draft",
     "action-items",
     "conversation-memory",
-    "channel-formatter"
+    "channel-formatter",
+    "stock-analysis",
+    "skill-updater",
+    "pptx-slides",
+    "sharepoint-files"
   ],
   "scripts": {
     "build": "npm run build --workspaces",
