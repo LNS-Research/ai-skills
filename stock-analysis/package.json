@@ -1,0 +1,14 @@
+{
+  "name": "@openbrain/stock-analysis",
+  "version": "1.0.0",
+  "description": "Multi-dimensional stock & crypto analysis with Hot Scanner and Rumor Scanner",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

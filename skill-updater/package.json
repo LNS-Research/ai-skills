@@ -1,0 +1,17 @@
+{
+  "name": "@openbrain/skill-updater",
+  "version": "1.0.0",
+  "description": "Monitors OpenClaw, MCP registries, and ai-skills repo for new capabilities. Logs gaps as feature requests.",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "bin": {
+    "skill-updater": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}
