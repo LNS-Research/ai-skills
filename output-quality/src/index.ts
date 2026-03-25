@@ -170,15 +170,20 @@ Each ## section must contain AT MOST 700 characters of body text (bullets + pros
 Do NOT count table rows (lines starting with |) or ## headings toward this limit.
 Count characters precisely — you can count actual characters in each non-table, non-heading paragraph.
 ${goldSection}
+SLIDE TRANSLATION RULES — this is not a copy-paste task. You are translating an analyst document into slide-ready content:
+- ## headings are slide titles. Remove any "Slide N:" or "Slide N." prefix (e.g. "## Slide 3: Title" → "## Title")
+- Each slide needs ONE clear assertion the audience takes away — make it the first bullet or subtitle line
+- Bullets must be conclusions, not descriptions. Bad: "Three issues were identified." Good: "Three structural gaps block the roadmap."
+- Cut filler transitions ("This maps to...", "It is worth noting that...") — every line must earn its place
+
 STRICT RULES — violations are unacceptable:
 - NEVER change or drop any number: dollar amounts, percentages, weights, correlations
 - NEVER remove named entities: company names, person names, product names
 - NEVER remove direct quotes (lines starting with > or containing quotation marks around a full sentence)
 - NEVER alter table rows — tables pass through unchanged
-- NEVER change ## headings
-- Combine related bullets into single crisp sentences to reduce line count
+- Combine related bullets into single crisp assertion sentences to reduce line count
 - REMOVE any percentage claim that has no source in the surrounding text unless the sentence names a specific study, report, or data source
-- If a section has ≤12 content lines already, return it EXACTLY as written — do not touch it
+- If a section has ≤12 content lines already, apply translation rules but do not compress further
 
 PROSE-TO-BULLETS RULE (most important for slide readability):
 - Any continuous prose paragraph (text not starting with - or * or >, and longer than 100 characters) MUST be converted into 2–3 tight assertion bullets. Each bullet = one crisp sentence. Do not preserve prose paragraphs as-is — a wall of text on a PowerPoint slide fails.
