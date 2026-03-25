@@ -1,5 +1,5 @@
 {
-  "name": "@openbrain/capture",
+  "name": "@lns-skills/capture",
   "version": "1.0.0",
   "description": "Universal knowledge capture — embed, extract metadata, dedup-upsert into a pgvector store",
   "type": "module",

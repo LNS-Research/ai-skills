@@ -1,12 +1,12 @@
 /**
- * @openbrain/skill-updater
+ * @lns-skills/skill-updater
  *
  * Monitors OpenClaw skills, Smithery MCP registry, and GitHub MCP servers list
- * for new capabilities. Compares against installed @openbrain packages and
+ * for new capabilities. Compares against installed @lns-skills packages and
  * outputs a gap report. Can log gaps directly to .learnings/FEATURE_REQUESTS.md.
  *
  * Usage:
- *   import { createSkillUpdater } from "@openbrain/skill-updater";
+ *   import { createSkillUpdater } from "@lns-skills/skill-updater";
  *
  *   const updater = createSkillUpdater({
  *     installedPackages: ["hybrid-search", "triage", "stock-analysis"],
@@ -42,7 +42,7 @@ export interface UpdateReport {
 }
 
 export interface SkillUpdaterConfig {
-  /** Names of already-installed @openbrain packages (without the @openbrain/ prefix) */
+  /** Names of already-installed @lns-skills packages (without the @lns-skills/ prefix) */
   installedPackages: string[];
   /** Path to .learnings directory (optional — for auto-logging gaps) */
   learningsDir?: string;
@@ -57,7 +57,7 @@ const DEFAULT_KEYWORDS = [
   "digest", "todo", "task", "reminder", "document", "pdf", "research",
 ];
 
-// Concepts already well-covered by @openbrain packages — skip these
+// Concepts already well-covered by @lns-skills packages — skip these
 const COVERED_CONCEPTS = [
   "hybrid-search", "search", "vector", "semantic",
   "triage", "email-triage", "email classify",
@@ -69,7 +69,7 @@ const COVERED_CONCEPTS = [
   "channel-formatter", "format", "sms format", "telegram",
   "stock-analysis", "stock", "crypto", "finance analysis",
   "skill-updater", "skill discovery", "mcp registry",
-  // OpenBrain MCP tools already implemented
+  // MCP tools already implemented in personal infrastructure
   "youtube transcript", "youtube", "reminders", "imessage",
   "brave search", "web search", "read url", "jina",
   "apple notes", "apple reminders",
@@ -132,7 +132,7 @@ export function createSkillUpdater(config: SkillUpdaterConfig) {
             description: `OpenClaw skill: ${skill.name}`,
             url: `https://clawhub.ai/${skill.author}/${skill.name}`,
             relevanceScore: score,
-            reason: `Relevant OpenClaw skill not yet implemented as @openbrain package`,
+            reason: `Relevant OpenClaw skill not yet implemented as @lns-skills/ package`,
           });
         }
       }
@@ -151,7 +151,7 @@ export function createSkillUpdater(config: SkillUpdaterConfig) {
             description: server.description,
             url: server.url,
             relevanceScore: score,
-            reason: `MCP server not yet integrated as OpenBrain tool`,
+            reason: `MCP server not yet integrated as an lns-skills tool`,
           });
         }
       }
@@ -237,7 +237,7 @@ ${gap.description}
 - Relevance Score: ${gap.relevanceScore}
 
 ### Suggested Implementation
-Build as \`@openbrain/${gap.name.split("/").pop()}\` package or MCP tool.
+Build as \`@lns-skills/${gap.name.split("/").pop()}\` package or MCP tool.
 
 ### Metadata
 - Frequency: first_time

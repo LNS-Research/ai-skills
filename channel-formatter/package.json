@@ -1,5 +1,5 @@
 {
-  "name": "@openbrain/channel-formatter",
+  "name": "@lns-skills/channel-formatter",
   "version": "1.0.0",
   "description": "Format AI response Markdown for Telegram, Slack, Teams, and SMS — zero dependencies",
   "type": "module",

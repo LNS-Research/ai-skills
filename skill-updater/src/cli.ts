@@ -8,7 +8,7 @@
  *   npx tsx /path/to/skill-updater/src/cli.ts --log-gaps
  *
  * Environment:
- *   OPENBRAIN_LEARNINGS_DIR   Path to .learnings dir (default: ~/projects/openbrain/.learnings)
+ *   LEARNINGS_DIR   Path to .learnings dir (default: ~/projects/ai-skills/.learnings)
  */
 
 import { createSkillUpdater } from "./index.js";
@@ -34,8 +34,8 @@ const INSTALLED = [
 ];
 
 const LEARNINGS_DIR =
-  process.env.OPENBRAIN_LEARNINGS_DIR ??
-  join(homedir(), "projects/openbrain/.learnings");
+  process.env.LEARNINGS_DIR ??
+  join(homedir(), "projects/ai-skills/.learnings");
 
 const updater = createSkillUpdater({
   installedPackages: INSTALLED,

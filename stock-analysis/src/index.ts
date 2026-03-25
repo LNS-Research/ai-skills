@@ -1,5 +1,5 @@
 /**
- * @openbrain/stock-analysis
+ * @lns-skills/stock-analysis
  *
  * Multi-dimensional stock & crypto analysis with Hot Scanner and Rumor Scanner.
  * All data sources are free (Yahoo Finance, SEC EDGAR, CoinGecko).
@@ -9,7 +9,7 @@
  * Consult a licensed financial advisor before making investment decisions.
  *
  * Usage:
- *   import { createStockAnalyzer } from "@openbrain/stock-analysis";
+ *   import { createStockAnalyzer } from "@lns-skills/stock-analysis";
  *
  *   const analyzer = createStockAnalyzer({ anthropicApiKey: process.env.ANTHROPIC_API_KEY! });
  *   const result = await analyzer.analyze("AAPL");

@@ -4,7 +4,7 @@
  */
 
 const HEADERS = {
-  "User-Agent": "OpenBrain-SkillUpdater/1.0",
+  "User-Agent": "lns-skills-updater/1.0",
   Accept: "application/json",
 };
 

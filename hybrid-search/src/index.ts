@@ -1,5 +1,5 @@
 /**
- * @openbrain/hybrid-search
+ * @lns-skills/hybrid-search
  *
  * Hybrid semantic + keyword search over a Postgres + pgvector table.
  * Uses Reciprocal Rank Fusion (RRF) to combine cosine similarity (pgvector)
@@ -19,7 +19,7 @@
  *   CREATE INDEX ON thoughts USING GIN (to_tsvector('english', content));
  *
  * Usage:
- *   import { createHybridSearch } from "@openbrain/hybrid-search";
+ *   import { createHybridSearch } from "@lns-skills/hybrid-search";
  *
  *   const search = createHybridSearch({
  *     pool,                              // node-postgres Pool

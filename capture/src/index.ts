@@ -1,11 +1,11 @@
 /**
- * @openbrain/capture
+ * @lns-skills/capture
  *
  * Universal knowledge capture with embedding + metadata extraction + deduplication.
  * Stores content into a Postgres + pgvector "thoughts" table.
  *
  * Usage:
- *   import { createCapture } from "@openbrain/capture";
+ *   import { createCapture } from "@lns-skills/capture";
  *
  *   const capture = createCapture({
  *     pool,

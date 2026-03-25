@@ -1,5 +1,5 @@
 {
-  "name": "@openbrain/action-items",
+  "name": "@lns-skills/action-items",
   "version": "1.0.0",
   "description": "Extract structured action items from documents, transcripts, and messages using Claude",
   "type": "module",

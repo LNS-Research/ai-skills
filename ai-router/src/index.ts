@@ -1,16 +1,16 @@
 /**
- * @openbrain/ai-router
+ * @lns-skills/ai-router
  *
  * Unified model routing layer:
  *   - Haiku  → fast classification, extraction, summarization
  *   - Sonnet → complex reasoning, drafting, analysis
  *   - Local  → Ollama (falls back to Haiku if unavailable)
  *
- * Unifies OpenBrain's embedding provider pattern and
+ * Unifies the embedding provider pattern from personal tooling and
  * lnsr-tool-v2's localOrHaiku into one consistent interface.
  *
  * Usage:
- *   import { createAIRouter } from "@openbrain/ai-router";
+ *   import { createAIRouter } from "@lns-skills/ai-router";
  *
  *   const ai = createAIRouter({ anthropicApiKey: process.env.ANTHROPIC_API_KEY });
  *

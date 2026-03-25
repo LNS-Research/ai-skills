@@ -1,11 +1,11 @@
 /**
- * @openbrain/action-items
+ * @lns-skills/action-items
  *
  * Extract structured action items from documents, transcripts, and messages
  * using Claude Haiku. Returns JSON-typed results ready to store or display.
  *
  * Usage:
- *   import { createActionItemExtractor } from "@openbrain/action-items";
+ *   import { createActionItemExtractor } from "@lns-skills/action-items";
  *
  *   const extract = createActionItemExtractor({
  *     anthropicApiKey: process.env.ANTHROPIC_API_KEY!,

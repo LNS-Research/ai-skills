@@ -1,5 +1,5 @@
 {
-  "name": "@openbrain/sharepoint-files",
+  "name": "@lns-skills/sharepoint-files",
   "version": "1.0.0",
   "description": "M365 SharePoint file access via Microsoft Graph API — auth, drive discovery, file listing, download, and text extraction",
   "type": "module",

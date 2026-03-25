@@ -1,5 +1,5 @@
 {
-  "name": "@openbrain/conversation-memory",
+  "name": "@lns-skills/conversation-memory",
   "version": "1.0.0",
   "description": "Cross-session AI conversation memory — extract durable facts and inject into future prompts",
   "type": "module",

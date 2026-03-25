@@ -1,12 +1,12 @@
 /**
- * @openbrain/triage
+ * @lns-skills/triage
  *
  * AI-powered email inbox triage using Claude Haiku.
  * Classifies emails into four buckets, optionally drafts responses,
  * and learns skip rules from user feedback.
  *
  * Usage:
- *   import { EmailTriage } from "@openbrain/triage";
+ *   import { EmailTriage } from "@lns-skills/triage";
  *
  *   const triage = new EmailTriage({
  *     anthropicApiKey: process.env.ANTHROPIC_API_KEY!,

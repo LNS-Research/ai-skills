@@ -34,27 +34,27 @@ During development (before publishing to GitHub Packages):
 ```json
 // package.json
 "dependencies": {
-  "@openbrain/hybrid-search": "file:../ai-skills/hybrid-search"
+  "@lns-skills/hybrid-search": "file:../ai-skills/hybrid-search"
 }
 ```
 
 Once published to GitHub Packages:
 ```json
 "dependencies": {
-  "@openbrain/hybrid-search": "1.0.0"
+  "@lns-skills/hybrid-search": "1.0.0"
 }
 ```
 
 Add to `~/.npmrc` (never commit this):
 ```
 //npm.pkg.github.com/:_authToken=YOUR_GITHUB_PAT
-@openbrain:registry=https://npm.pkg.github.com
+@lns-skills:registry=https://npm.pkg.github.com
 ```
 
 ## Adding a new skill
 
 1. `mkdir my-skill && cd my-skill`
-2. Create `package.json` with `"name": "@openbrain/my-skill"` and `"type": "module"`
+2. Create `package.json` with `"name": "@lns-skills/my-skill"` and `"type": "module"`
 3. Create `src/index.ts` — all config via constructor/factory params, zero hardcoded data
 4. Add to `workspaces` in root `package.json`
 5. Open a PR

@@ -1,5 +1,5 @@
 {
-  "name": "@openbrain/hybrid-search",
+  "name": "@lns-skills/hybrid-search",
   "version": "1.0.0",
   "description": "Hybrid semantic + keyword search over a pgvector Postgres store using Reciprocal Rank Fusion",
   "type": "module",

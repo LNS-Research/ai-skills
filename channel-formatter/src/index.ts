@@ -1,11 +1,11 @@
 /**
- * @openbrain/channel-formatter
+ * @lns-skills/channel-formatter
  *
  * Format AI response Markdown for different messaging channels.
  * Pure functions — zero runtime dependencies.
  *
  * Usage:
- *   import { formatForChannel } from "@openbrain/channel-formatter";
+ *   import { formatForChannel } from "@lns-skills/channel-formatter";
  *
  *   const chunks = formatForChannel(markdownText, "telegram");
  *   for (const chunk of chunks) await sendMessage(chunk);

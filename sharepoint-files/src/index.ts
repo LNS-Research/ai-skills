@@ -1,5 +1,5 @@
 /**
- * @openbrain/sharepoint-files
+ * @lns-skills/sharepoint-files
  *
  * Microsoft 365 SharePoint file access via the Graph API.
  * Handles client-credentials auth, drive discovery, file listing,
@@ -10,7 +10,7 @@
  * (uses the global fetch API, no Node-specific HTTP modules).
  *
  * Usage:
- *   import { createSharePointClient } from "@openbrain/sharepoint-files";
+ *   import { createSharePointClient } from "@lns-skills/sharepoint-files";
  *
  *   const sp = createSharePointClient({
  *     tenantId:     process.env.MICROSOFT_TENANT_ID!,

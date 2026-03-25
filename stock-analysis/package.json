@@ -1,5 +1,5 @@
 {
-  "name": "@openbrain/stock-analysis",
+  "name": "@lns-skills/stock-analysis",
   "version": "1.0.0",
   "description": "Multi-dimensional stock & crypto analysis with Hot Scanner and Rumor Scanner",
   "main": "dist/index.js",

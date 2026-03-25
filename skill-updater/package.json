@@ -1,5 +1,5 @@
 {
-  "name": "@openbrain/skill-updater",
+  "name": "@lns-skills/skill-updater",
   "version": "1.0.0",
   "description": "Monitors OpenClaw, MCP registries, and ai-skills repo for new capabilities. Logs gaps as feature requests.",
   "main": "dist/index.js",

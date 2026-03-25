@@ -7,7 +7,7 @@
 import type { InsiderTrade } from "./types.js";
 
 const HEADERS = {
-  "User-Agent": "OpenBrain/1.0 contact@openbrain.ai",
+  "User-Agent": "lns-skills/1.0 contact@lns.com",
   Accept: "application/json",
 };
 

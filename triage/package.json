@@ -1,5 +1,5 @@
 {
-  "name": "@openbrain/triage",
+  "name": "@lns-skills/triage",
   "version": "1.0.0",
   "description": "AI email triage — classify emails as dispatch/prep/yours/skip, draft responses, learn noise rules",
   "type": "module",

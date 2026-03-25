@@ -1,5 +1,5 @@
 {
-  "name": "@openbrain/email-draft",
+  "name": "@lns-skills/email-draft",
   "version": "1.0.0",
   "description": "Push email drafts to Gmail Drafts folder (via API) or Apple Mail Drafts (via JXA). macOS only for Apple Mail.",
   "type": "module",

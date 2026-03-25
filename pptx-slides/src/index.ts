@@ -1,5 +1,5 @@
 /**
- * @openbrain/pptx-slides
+ * @lns-skills/pptx-slides
  *
  * Extract per-slide text and structured metadata from a PPTX buffer.
  *
@@ -17,7 +17,7 @@
  * Deno, browsers.
  *
  * Usage:
- *   import { extractSlides, parseSlideFields } from "@openbrain/pptx-slides";
+ *   import { extractSlides, parseSlideFields } from "@lns-skills/pptx-slides";
  *
  *   // Step 1 — extract raw slide text
  *   const slides = await extractSlides(arrayBuffer);

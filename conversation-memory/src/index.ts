@@ -1,5 +1,5 @@
 /**
- * @openbrain/conversation-memory
+ * @lns-skills/conversation-memory
  *
  * Cross-session AI conversation memory.
  * Extracts durable facts from AI exchanges using Claude Haiku and
@@ -7,7 +7,7 @@
  * Inject loaded memories into future system prompts for continuity.
  *
  * Usage:
- *   import { createMemoryStore } from "@openbrain/conversation-memory";
+ *   import { createMemoryStore } from "@lns-skills/conversation-memory";
  *
  *   const memory = createMemoryStore({
  *     anthropicApiKey: process.env.ANTHROPIC_API_KEY!,
