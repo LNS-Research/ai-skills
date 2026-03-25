@@ -8,7 +8,7 @@ Format: newest first.
 ## [2026-03-12] — Two New Packages
 
 ### New Packages
-- **`@lns-skills/pptx-slides`** — Generic PPTX slide extractor. Unzips PPTX as a ZIP (via fflate), parses per-slide `<a:t>` text runs, and applies configurable regex/strategy extractors to pull structured fields (IDs, percentages, headlines, section headers) from slide text. Works in Node.js and Cloudflare Workers. Ships with a pre-built `LNS_RESEARCH_EXTRACTORS` config for LNS master data decks (L/F benchmark stats). Extracted from CDI `sync-visual-catalog` cron.
+- **`@lns-skills/pptx-extractor`** — Generic PPTX slide extractor. Unzips PPTX as a ZIP (via fflate), parses per-slide `<a:t>` text runs, and applies configurable regex/strategy extractors to pull structured fields (IDs, percentages, headlines, section headers) from slide text. Works in Node.js and Cloudflare Workers. Ships with a pre-built `LNS_RESEARCH_EXTRACTORS` config for LNS master data decks (L/F benchmark stats). Extracted from CDI `sync-visual-catalog` cron.
 - **`@lns-skills/sharepoint-files`** — M365 SharePoint file access via Graph API. Config-driven client factory: client-credentials auth with token caching, site lookup by host:path (no Sites.Read.All required), drive listing, BFS file traversal with filter options, file download, and plain-text extraction for PPTX/DOCX/PDF/XLSX/text formats (heavy extractors are dynamic imports — install only what you need). Works in Node.js and Cloudflare Workers. Extracted from CDI `ms365.js`.
 
 ---

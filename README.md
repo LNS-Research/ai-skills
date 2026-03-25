@@ -16,7 +16,7 @@ All packages are **config-driven** — no hardcoded credentials, personal data, 
 | [`action-items`](action-items/) | Extract structured action items from transcripts, docs, and messages using Claude |
 | [`conversation-memory`](conversation-memory/) | Cross-session AI memory — extract durable facts and inject into future prompts |
 | [`channel-formatter`](channel-formatter/) | Format AI Markdown for Telegram, Slack, Teams, SMS — zero dependencies |
-| [`pptx-slides`](pptx-slides/) | Extract per-slide text and structured fields from PPTX files — configurable regex patterns, works in Node + Cloudflare Workers |
+| [`pptx-extractor`](pptx-extractor/) | Extract per-slide text and structured fields from PPTX files — configurable regex patterns, works in Node + Cloudflare Workers |
 | [`sharepoint-files`](sharepoint-files/) | M365 SharePoint file access via Graph API — auth, drive discovery, file listing, download, text extraction |
 | [`stock-analysis`](stock-analysis/) | Multi-dimensional stock & crypto analysis — Yahoo Finance, SEC EDGAR, CoinGecko, AI summary via Claude Haiku |
 | [`skill-updater`](skill-updater/) | Monitor OpenClaw, Smithery, and GitHub MCP registry for new capabilities; compare against installed packages, output gap report |

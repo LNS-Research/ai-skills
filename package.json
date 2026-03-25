@@ -12,7 +12,7 @@
     "channel-formatter",
     "stock-analysis",
     "skill-updater",
-    "pptx-slides",
+    "pptx-extractor",
     "sharepoint-files"
   ],
   "scripts": {

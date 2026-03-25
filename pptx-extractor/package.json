@@ -1,5 +1,5 @@
 {
-  "name": "@lns-skills/pptx-slides",
+  "name": "@lns-skills/pptx-extractor",
   "version": "1.0.0",
   "description": "Extract per-slide text and structured metadata from PPTX files — generic, configurable, no external API calls",
   "type": "module",
