@@ -13,7 +13,8 @@
     "stock-analysis",
     "skill-updater",
     "pptx-extractor",
-    "sharepoint-files"
+    "sharepoint-files",
+    "output-quality"
   ],
   "scripts": {
     "build": "npm run build --workspaces",
