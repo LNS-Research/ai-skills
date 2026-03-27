@@ -5,6 +5,13 @@ Format: newest first.
 
 ---
 
+## [2026-03-27] — New Package
+
+### New Packages
+- **`@lns-skills/output-quality`** — AI quality pipeline for consultant documents before export. Three-stage pipeline: `reviewContent` (Sonnet quality gating, score 1–10, approve ≥ 7), `reviseContent` (Sonnet rewrite using reviewer instructions), `compressForPptx` (Sonnet slide-fit compression with gold standard injection, ≤ 700 body chars per `##` section, prose-to-bullets conversion). All methods fail open. Works in Node.js and Cloudflare Workers. Extracted from CDI `generate.js`.
+
+---
+
 ## [2026-03-12] — Two New Packages
 
 ### New Packages
