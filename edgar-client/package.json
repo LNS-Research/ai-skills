@@ -1,0 +1,12 @@
+{
+  "name": "@lns-skills/edgar-client",
+  "version": "0.1.0",
+  "description": "Unified SEC EDGAR client: CIK lookup, EFTS search, XBRL financials, Form 4, 8-K parsing. Zero API key needed.",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "scripts": {
+    "test": "npx tsx src/test.ts"
+  },
+  "dependencies": {}
+}
