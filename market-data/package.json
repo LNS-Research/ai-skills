@@ -1,0 +1,9 @@
+{
+  "name": "@lns-skills/market-data",
+  "version": "0.1.0",
+  "description": "Stock price fetching with disk cache, NaN handling, courtesy delays. Wraps yfinance for reliable batch price data.",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {}
+}

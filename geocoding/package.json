@@ -1,0 +1,9 @@
+{
+  "name": "@lns-skills/geocoding",
+  "version": "0.1.0",
+  "description": "Multi-provider geocoding with fallback chain: Google Maps → Mapbox → Nominatim → Overpass. Forward + reverse geocoding.",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {}
+}

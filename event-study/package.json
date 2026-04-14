@@ -1,0 +1,9 @@
+{
+  "name": "@lns-skills/event-study",
+  "version": "0.1.0",
+  "description": "Event study engine: compute excess returns at T+1/5/10/30/90/180 vs benchmark ETF. Aggregate by event type for backtesting.",
+  "type": "module",
+  "main": "src/index.ts",
+  "types": "src/index.ts",
+  "dependencies": {}
+}
