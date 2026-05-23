@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Agent Factory — Setup Guide</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: 13px;
+    line-height: 1.6;
+    color: #1a1a2e;
+    background: #fff;
+    padding: 0;
+  }
+
+  @page {
+    size: Letter;
+    margin: 0.65in 0.7in 0.65in 0.7in;
+  }
+
+  @media print {
+    body { font-size: 11.5px; }
+    .no-print { display: none; }
+    .page-break { page-break-before: always; }
+    section { page-break-inside: avoid; }
+  }
+
+  .page { max-width: 780px; margin: 0 auto; padding: 48px 56px; }
+
+  /* Header */
+  .header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 24px;
+    border-bottom: 3px solid #6366f1;
+    margin-bottom: 32px;
+  }
+  .header-left h1 {
+    font-size: 28px;
+    font-weight: 700;
+    color: #1a1a2e;
+    letter-spacing: -0.5px;
+  }
+  .header-left .subtitle {
+    font-size: 14px;
+    color: #6366f1;
+    font-weight: 500;
+    margin-top: 4px;
+  }
+  .header-right {
+    text-align: right;
+    font-size: 11px;
+    color: #64748b;
+    line-height: 1.8;
+  }
+  .header-right a {
+    color: #6366f1;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  /* Intro */
+  .intro {
+    background: #f8f7ff;
+    border-left: 4px solid #6366f1;
+    padding: 14px 18px;
+    border-radius: 0 8px 8px 0;
+    margin-bottom: 28px;
+    font-size: 13px;
+    color: #374151;
+  }
+  .intro strong { color: #1a1a2e; }
+
+  /* Section headings */
+  h2 {
+    font-size: 15px;
+    font-weight: 700;
+    color: #1a1a2e;
+    margin: 28px 0 12px 0;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid #e2e8f0;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  h2 .num {
+    background: #6366f1;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+  h3 {
+    font-size: 12.5px;
+    font-weight: 600;
+    color: #374151;
+    margin: 14px 0 6px 0;
+  }
+
+  /* Agent table */
+  .agent-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 4px;
+  }
+  .agent-card {
+    border: 1.5px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 12px 14px;
+  }
+  .agent-card.recommended { border-color: #6366f1; background: #f8f7ff; }
+  .agent-name {
+    font-size: 13px;
+    font-weight: 600;
+    color: #1a1a2e;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-bottom: 3px;
+  }
+  .badge {
+    font-size: 9px;
+    font-weight: 700;
+    padding: 2px 6px;
+    border-radius: 10px;
+    letter-spacing: 0.3px;
+    text-transform: uppercase;
+  }
+  .badge-free { background: #dcfce7; color: #166534; }
+  .badge-sub { background: #dbeafe; color: #1e40af; }
+  .badge-local { background: #fef3c7; color: #92400e; }
+  .agent-card p { font-size: 11.5px; color: #64748b; line-height: 1.4; }
+
+  /* Steps */
+  .steps { counter-reset: step; }
+  .step {
+    display: flex;
+    gap: 14px;
+    margin-bottom: 14px;
+    align-items: flex-start;
+  }
+  .step-num {
+    background: #1a1a2e;
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+  .step-body { flex: 1; }
+  .step-body strong { font-weight: 600; color: #1a1a2e; }
+  .step-body p { color: #374151; margin-top: 2px; font-size: 12px; }
+
+  /* Code blocks */
+  code {
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    font-size: 11px;
+    background: #f1f5f9;
+    color: #6366f1;
+    padding: 1px 5px;
+    border-radius: 4px;
+  }
+  pre {
+    background: #1e293b;
+    color: #e2e8f0;
+    font-family: 'JetBrains Mono', 'SF Mono', monospace;
+    font-size: 11px;
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin: 8px 0;
+    overflow-x: auto;
+    line-height: 1.7;
+  }
+  pre .comment { color: #64748b; }
+  pre .cmd { color: #a5f3fc; }
+  pre .val { color: #86efac; }
+
+  /* Commands table */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 8px 0;
+    font-size: 12px;
+  }
+  th {
+    background: #1a1a2e;
+    color: #fff;
+    padding: 7px 10px;
+    text-align: left;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+  }
+  td {
+    padding: 6px 10px;
+    border-bottom: 1px solid #f1f5f9;
+    vertical-align: top;
+  }
+  tr:nth-child(even) td { background: #f8fafc; }
+  td code { background: none; padding: 0; color: #4f46e5; font-size: 11px; }
+  td:last-child { color: #64748b; font-size: 11.5px; }
+
+  /* Checklist */
+  .checklist { list-style: none; }
+  .checklist li {
+    padding: 5px 0 5px 26px;
+    position: relative;
+    font-size: 12.5px;
+    color: #374151;
+    border-bottom: 1px solid #f1f5f9;
+  }
+  .checklist li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 8px;
+    width: 14px;
+    height: 14px;
+    border: 1.5px solid #cbd5e1;
+    border-radius: 3px;
+  }
+
+  /* Note boxes */
+  .note {
+    background: #fffbeb;
+    border-left: 3px solid #f59e0b;
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 12px;
+    color: #374151;
+    margin: 10px 0;
+  }
+  .note strong { color: #92400e; }
+
+  .tip {
+    background: #f0fdf4;
+    border-left: 3px solid #22c55e;
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 12px;
+    color: #374151;
+    margin: 10px 0;
+  }
+
+  /* Debate flow */
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 12px;
+    background: #f8f7ff;
+    border-radius: 8px;
+    margin: 8px 0;
+    flex-wrap: wrap;
+  }
+  .flow-item {
+    background: #fff;
+    border: 1.5px solid #c7d2fe;
+    border-radius: 6px;
+    padding: 5px 10px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #4338ca;
+    white-space: nowrap;
+  }
+  .flow-arrow { color: #6366f1; font-size: 14px; font-weight: 700; }
+  .flow-item.red { border-color: #fca5a5; color: #dc2626; background: #fff5f5; }
+  .flow-item.green { border-color: #86efac; color: #16a34a; background: #f0fdf4; }
+
+  /* Footer */
+  .footer {
+    margin-top: 36px;
+    padding-top: 16px;
+    border-top: 1.5px solid #e2e8f0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: #94a3b8;
+  }
+  .footer a { color: #6366f1; text-decoration: none; }
+
+  /* Print button */
+  .print-btn {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: #6366f1;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(99,102,241,0.3);
+  }
+  .print-btn:hover { background: #4f46e5; }
+</style>
+</head>
+<body>
+
+<button class="print-btn no-print" onclick="window.print()">Save as PDF</button>
+
+<div class="page">
+
+  <!-- HEADER -->
+  <div class="header">
+    <div class="header-left">
+      <h1>⚙️ Agent Factory</h1>
+      <div class="subtitle">Multi-Agent Discord Bot — Setup Guide</div>
+    </div>
+    <div class="header-right">
+      <div><strong>GitHub</strong></div>
+      <div><a href="https://github.com/LNS-Research/ai-skills">github.com/LNS-Research/ai-skills</a></div>
+      <div style="margin-top:4px"><strong>Setup skill</strong></div>
+      <div>Run <code style="background:#f1f5f9;color:#4f46e5">/setup-agent-factory</code> in Claude Code</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro">
+    <strong>What is this?</strong> Agent Factory is a Discord bot that routes your questions to multiple AI models — Claude, Gemini, local models, and more. Ask anything in Discord, watch the agents debate, and approve or reject the outcome with a button click. No per-query API costs. Uses subscription CLIs and local models.
+  </div>
+
+  <!-- WHAT YOU'LL HAVE -->
+  <h2><span class="num">0</span> What you'll end up with</h2>
+
+  <div class="flow">
+    <div class="flow-item">You type in Discord</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-item">Bot queues task</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-item">AI agents respond</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-item red">Red Team challenges</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-item">Synthesis</div>
+    <div class="flow-arrow">→</div>
+    <div class="flow-item green">✅ / ❌ buttons</div>
+  </div>
+
+  <p style="font-size:12px;color:#64748b;margin-top:6px;">Every debate has a built-in <strong>Red Team</strong> agent that plays devil's advocate — attacks the dominant view to prevent echo chambers. The synthesizer tells you which objections were valid.</p>
+
+  <!-- PREREQUISITES -->
+  <h2><span class="num">1</span> Prerequisites checklist</h2>
+
+  <ul class="checklist">
+    <li><strong>Node.js 18+</strong> — <code>node --version</code> &nbsp;·&nbsp; Install at nodejs.org if needed</li>
+    <li><strong>Discord account</strong> — and a server where you're admin (or create one)</li>
+    <li><strong>Database</strong> — Docker Desktop (easiest) <em>or</em> a free Supabase account (supabase.com)</li>
+    <li><strong>At least one AI agent</strong> — see section 2 below</li>
+    <li><strong>Claude Code installed</strong> — for the interactive setup skill (optional but recommended)</li>
+  </ul>
+
+  <!-- AGENTS -->
+  <h2><span class="num">2</span> Choose your agents (pick at least one)</h2>
+  <p style="font-size:12px;color:#64748b;margin-bottom:10px;">Goal: no per-query API costs. Use subscription CLIs and local models.</p>
+
+  <div class="agent-grid">
+    <div class="agent-card recommended">
+      <div class="agent-name">🧠 Claude CLI <span class="badge badge-sub">Subscription</span></div>
+      <p>Requires <strong>Claude Max</strong> subscription (claude.ai). After installing Claude Code, the <code>claude</code> binary is already there — zero extra setup.</p>
+    </div>
+    <div class="agent-card recommended">
+      <div class="agent-name">✨ Gemini CLI <span class="badge badge-free">Free</span></div>
+      <p>Google account auth — no API key. Install: <code>npm i -g @google/gemini-cli</code> then <code>gemini auth</code> (one-time browser login).</p>
+    </div>
+    <div class="agent-card">
+      <div class="agent-name">💻 Ollama (local) <span class="badge badge-local">Local</span></div>
+      <p>Runs on your machine. Install at <strong>ollama.ai</strong>, then <code>ollama pull llama3.2</code>. Needs 8GB+ RAM. Free, private, slower.</p>
+    </div>
+    <div class="agent-card">
+      <div class="agent-name">🤖 Codex CLI <span class="badge badge-sub">Subscription</span></div>
+      <p>Requires OpenAI subscription + Codex desktop app. Mac: binary at <code>/Applications/Codex.app/Contents/Resources/codex</code></p>
+    </div>
+  </div>
+
+  <div class="note"><strong>Note:</strong> Configure only agents you have. Unconfigured agents are silently skipped. The bot works with just one.</div>
+
+  <!-- DISCORD SETUP -->
+  <h2><span class="num">3</span> Discord bot setup (~5 min)</h2>
+
+  <h3>Create the bot</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">1</div>
+      <div class="step-body"><strong>Go to discord.com/developers/applications</strong><p>Click <strong>New Application</strong> → give it a name (e.g. "MyAgentBot") → Create</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">2</div>
+      <div class="step-body"><strong>Add a bot</strong><p>Left sidebar → <strong>Bot</strong> → click <strong>Add Bot</strong> → confirm</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">3</div>
+      <div class="step-body">
+        <strong>Enable Message Content Intent</strong>
+        <p>Still in Bot settings → scroll to <strong>Privileged Gateway Intents</strong> → toggle <strong>Message Content Intent</strong> ON → Save Changes.</p>
+        <div class="note" style="margin-top:6px"><strong>Don't skip this.</strong> Without it the bot sees reactions but not message text.</div>
+      </div>
+    </div>
+    <div class="step">
+      <div class="step-num">4</div>
+      <div class="step-body"><strong>Copy the bot token</strong><p>Token section → <strong>Reset Token</strong> → copy it. Save it — you'll add it to <code>.env</code> as <code>DISCORD_BOT_TOKEN</code>.</p></div>
+    </div>
+  </div>
+
+  <h3>Invite bot to your server</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num">5</div>
+      <div class="step-body"><strong>Generate invite URL</strong><p>Left sidebar → <strong>OAuth2</strong> → <strong>URL Generator</strong> → Scopes: check <code>bot</code> → Permissions: <code>Send Messages</code>, <code>Read Messages</code>, <code>Add Reactions</code>, <code>Embed Links</code>, <code>Use Slash Commands</code> → copy URL → open in browser → select server → Authorize</p></div>
+    </div>
+    <div class="step">
+      <div class="step-num">6</div>
+      <div class="step-body"><strong>Get channel ID + webhook</strong><p>Enable Developer Mode (User Settings → Advanced). Right-click your channel → <strong>Copy Channel ID</strong> → save as <code>DISCORD_TASK_CHANNEL_ID</code>.<br>Then: Edit Channel → Integrations → Webhooks → New Webhook → Copy URL → save as <code>DISCORD_WEBHOOK_URL</code>.</p></div>
+    </div>
+  </div>
+
+  <!-- DATABASE -->
+  <div class="page-break"></div>
+  <h2><span class="num">4</span> Database (pick one)</h2>
+
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px">
+    <div style="border:1.5px solid #e2e8f0;border-radius:8px;padding:14px">
+      <h3 style="margin-top:0">Option A — Docker (local)</h3>
+      <p style="font-size:12px;color:#374151;margin-bottom:8px">Requires Docker Desktop running.</p>
+      <pre>cd ai-skills/agent-factory
+docker compose up -d</pre>
+      <p style="font-size:11.5px;color:#64748b">DATABASE_URL will be:<br><code>postgresql://agent:agentfactory@localhost:5432/agent_factory</code></p>
+    </div>
+    <div style="border:1.5px solid #e2e8f0;border-radius:8px;padding:14px">
+      <h3 style="margin-top:0">Option B — Supabase (cloud)</h3>
+      <p style="font-size:12px;color:#374151;margin-bottom:8px">Free tier at supabase.com. No Docker needed.</p>
+      <ol style="font-size:12px;color:#374151;padding-left:16px;line-height:1.8">
+        <li>New Project → set password</li>
+        <li>Settings → Database → Connection String (URI)</li>
+        <li>Copy the <code>postgresql://...</code> string</li>
+        <li>Run: <code>psql "$DB_URL" -f schema.sql</code></li>
+      </ol>
+    </div>
+  </div>
+
+  <!-- INSTALL & CONFIG -->
+  <h2><span class="num">5</span> Install &amp; configure</h2>
+
+  <pre><span class="comment"># Clone the repo</span>
+<span class="cmd">git clone</span> <span class="val">https://github.com/LNS-Research/ai-skills.git</span>
+<span class="cmd">cd</span> ai-skills/agent-factory
+<span class="cmd">npm install</span>
+
+<span class="comment"># Copy the env template and fill it in</span>
+<span class="cmd">cp</span> .env.example .env
+<span class="cmd">nano</span> .env   <span class="comment"># or open in any editor</span></pre>
+
+  <p style="font-size:12px;color:#374151;margin-bottom:6px">Minimum <code>.env</code> for a Claude + Gemini setup:</p>
+  <pre>DATABASE_URL=<span class="val">postgresql://agent:agentfactory@localhost:5432/agent_factory</span>
+DISCORD_BOT_TOKEN=<span class="val">your_token_here</span>
+DISCORD_TASK_CHANNEL_ID=<span class="val">your_channel_id</span>
+DISCORD_WEBHOOK_URL=<span class="val">https://discord.com/api/webhooks/...</span>
+CLAUDE_BIN=<span class="val">/usr/local/bin/claude</span>      <span class="comment"># find yours: which claude</span>
+GEMINI_BIN=<span class="val">/opt/homebrew/bin/gemini</span>    <span class="comment"># find yours: which gemini</span>
+AGENT_ROUTER_ENABLED=<span class="val">1</span></pre>
+
+  <!-- START -->
+  <h2><span class="num">6</span> Start &amp; test</h2>
+
+  <pre><span class="cmd">npm start</span>
+<span class="comment"># You should see: [discord-bot] logged in as YourBotName#1234</span></pre>
+
+  <div class="tip">In your Discord channel, type: <code>What is the capital of France?</code> — the bot reacts ⚡ and replies within ~30 seconds.</div>
+
+  <p style="font-size:12px;color:#374151;margin-top:10px">Then try a debate:</p>
+  <pre>!debate: Should I use Postgres or SQLite for a small side project?</pre>
+  <p style="font-size:12px;color:#64748b">Watch the per-round embeds appear. After ~2 minutes you'll get an embed with <strong>✅ Approve &amp; Execute</strong> / <strong>❌ Reject</strong> / <strong>🔍 Ask Claude</strong> buttons.</p>
+
+  <!-- COMMANDS -->
+  <h2><span class="num">7</span> Discord command reference</h2>
+
+  <table>
+    <thead>
+      <tr><th>Command</th><th>What it does</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>What is X?</code></td><td>Auto-routed to best available agent (local model if possible, Claude as fallback)</td></tr>
+      <tr><td><code>!claude: prompt</code></td><td>Force Claude CLI</td></tr>
+      <tr><td><code>!gemini: prompt</code></td><td>Force Gemini CLI</td></tr>
+      <tr><td><code>!local: prompt</code></td><td>Force local Ollama model</td></tr>
+      <tr><td><code>!codex: prompt</code></td><td>Queue for next Codex session (async — no auto-reply)</td></tr>
+      <tr><td><code>!debate: topic</code></td><td>2-agent debate with default agents, one plays Red Team</td></tr>
+      <tr><td><code>!debate claude vs gemini: topic</code></td><td>Explicit agents — debate between Claude and Gemini</td></tr>
+      <tr><td><code>!debate claude vs gemini 3: topic</code></td><td>3 cycles each (more rounds, more thorough)</td></tr>
+      <tr><td><code>!debate claude vs gemini --red gemini: topic</code></td><td>Explicitly set Gemini as Red Team (adversarial role)</td></tr>
+    </tbody>
+  </table>
+
+  <h3>How debates work</h3>
+  <p style="font-size:12px;color:#374151;margin-bottom:8px">Each agent takes turns responding. The <strong>Red Team agent</strong> is given adversarial instructions — its job is to attack the dominant view and find weaknesses, not to be balanced. The synthesizer (Claude) then weighs in, noting which Red Team objections were valid vs. weak. Consensus reached <em>under adversarial pressure</em> is treated as stronger signal.</p>
+
+  <h3>Smart routing — saves money</h3>
+  <table>
+    <thead>
+      <tr><th>Task type</th><th>Routes to</th></tr>
+    </thead>
+    <tbody>
+      <tr><td><code>summarize</code>, <code>commit_msg</code>, <code>boilerplate</code>, <code>explain_fn</code>, <code>seed_data</code></td><td>Local model (free) → Claude as fallback</td></tr>
+      <tr><td><code>long_doc</code>, <code>vision</code>, <code>pdf_analysis</code></td><td>Gemini CLI</td></tr>
+      <tr><td><code>chat</code>, everything else</td><td>Claude CLI</td></tr>
+    </tbody>
+  </table>
+
+  <!-- TROUBLESHOOTING -->
+  <h2><span class="num">8</span> Troubleshooting</h2>
+
+  <table>
+    <thead>
+      <tr><th>Symptom</th><th>Fix</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>Bot doesn't react to messages</td><td>Check <strong>Message Content Intent</strong> is enabled in Developer Portal (Bot tab → Privileged Gateway Intents). This is the #1 mistake.</td></tr>
+      <tr><td><code>Used disallowed intents</code> error in logs</td><td>Same fix — enable Message Content Intent in portal, restart the service.</td></tr>
+      <tr><td>Bot joined server but channel ID not matching</td><td>Confirm Developer Mode is on (User Settings → Advanced → Developer Mode), then right-click channel again to copy ID.</td></tr>
+      <tr><td>Database connection refused</td><td>If using Docker: <code>docker compose ps</code> — ensure db shows healthy. If Supabase: check password in connection string.</td></tr>
+      <tr><td>Claude agent fails with auth error</td><td>Run <code>claude auth</code> in terminal to re-authenticate.</td></tr>
+      <tr><td>Gemini agent fails</td><td>Run <code>gemini auth</code> to re-authenticate with Google account.</td></tr>
+      <tr><td>Debate times out after 2 min</td><td>Local models (Ollama) are slow. Use <code>!debate claude vs gemini:</code> for fast debates.</td></tr>
+      <tr><td>Bot reacts ⚡ but no reply after 2 min</td><td>Check logs (<code>npm start</code> output). Debate results appear as webhook embeds, not bot replies.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ADVANCED -->
+  <h2>Advanced: project context injection</h2>
+
+  <p style="font-size:12px;color:#374151;margin-bottom:8px">Add a <code>CONTEXT_HINTS_JSON</code> env var so agents automatically receive context about your projects when a topic matches:</p>
+
+  <pre>CONTEXT_HINTS_JSON=[
+  {"pattern":"myapp","context":"MyApp is a SaaS tool for ..."},
+  {"pattern":"backend","context":"Our backend is Node.js + Postgres on Railway ..."}
+]</pre>
+
+  <p style="font-size:12px;color:#64748b">When you type <code>!debate: should myapp use Redis?</code>, the context is prepended automatically.</p>
+
+  <h2>Auto-start on boot</h2>
+  <p style="font-size:12px;color:#374151;margin-bottom:6px"><strong>macOS:</strong> Run <code>/setup-agent-factory</code> in Claude Code and ask it to set up the launchd service — it will write and load the plist automatically.</p>
+  <p style="font-size:12px;color:#374151"><strong>Linux:</strong> Ask Claude: "Set up a systemd service to run npm start in /path/to/agent-factory on boot."</p>
+
+  <!-- FOOTER -->
+  <div class="footer">
+    <div>Agent Factory · <a href="https://github.com/LNS-Research/ai-skills">github.com/LNS-Research/ai-skills</a> · agent-factory/</div>
+    <div>Run <code>/setup-agent-factory</code> in Claude Code for interactive guided setup</div>
+  </div>
+
+</div>
+
+</body>
+</html>
