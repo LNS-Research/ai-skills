@@ -1,14 +1,38 @@
 # Agent Factory Setup
 
-You are guiding the user through setting up their own multi-agent Discord bot. At the end they will be able to type questions into a Discord channel and have multiple AI agents debate, answer, and collaborate — then click Approve/Reject on the result.
+You are guiding the user through setting up Agent Factory — a multi-agent AI system where Claude, Gemini, local models, and Codex debate questions together and surface a recommended action for your approval.
 
 Work through each step in order. Run shell commands to verify before moving on. Be conversational and clear. If a step fails, diagnose and fix it before continuing.
 
 ---
 
-## Step 0: Welcome
+## Step 0: Why Agent Factory / What you'll get
 
-Tell the user: "I'm going to walk you through setting up Agent Factory — a multi-agent system that runs in Discord. You'll be able to type questions and have Claude, local AI models, and other agents debate and answer them. This takes about 15 minutes."
+Tell the user:
+
+**"Here's what Agent Factory does:**
+
+Most AI tools give you one model's answer. Agent Factory gives you a debate — Claude takes one side, a local model (or Gemini) takes another, a Red Team agent attacks the consensus, and a synthesis agent weighs all the arguments and surfaces a proposed action. You click Approve or Reject.
+
+**What you'll end up with:**
+- A background service that listens for questions
+- 2–5 AI agents that debate, challenge each other, and reach a consensus
+- Approve/Reject buttons on the final recommendation
+- Routing that sends cheap/simple tasks to free local models and saves API quota for complex ones
+
+**Two ways to interact — pick one:**
+
+**Option A — Discord bot**
+You type questions in a Discord channel from any device (phone, desktop, anywhere). Great if you already use Discord or want to access it on mobile.
+
+**Option B — Local file**
+Two markdown files in a folder: write your question in `inbox.md`, read the reply in `conversation.md`. No Discord account needed. Great for desktop-only use or if you want everything local.
+
+You can run both at once if you want (`TRANSPORT=both`).
+
+Which would you prefer? **(Discord / File / Both)**"
+
+Store their answer as `TRANSPORT_CHOICE`. Use it throughout to skip irrelevant steps.
 
 Ask: "What's your operating system? (macOS / Windows WSL / Linux)"
 
@@ -46,9 +70,8 @@ If not found, ask: "Do you want me to clone the ai-skills repo, or do you alread
 
 If cloning:
 ```bash
-git clone https://github.com/rdcahalane/ai-skills.git ~/projects/ai-skills
+git clone https://github.com/LNS-Research/ai-skills.git ~/projects/ai-skills
 ```
-(If private, they may need to authenticate — walk them through `gh auth login` if needed.)
 
 Set `FACTORY_DIR` to the agent-factory directory path. Default: `~/projects/ai-skills/agent-factory`
 
@@ -92,23 +115,26 @@ Ask these questions one at a time and record answers:
 - Yes → ask for its IP/URL, record as `BEAST_URL=http://x.x.x.x:8081`
 - No → skip
 
-**E. Gemini free tier?** (last resort if they have nothing else)
-If no agents were configured above: "You need at least one agent. The easiest free option is Gemini — get a free API key at https://aistudio.google.com/apikey. No credit card required."
-- Walk them through getting the key
-- Record `GEMINI_API_KEY=...`
+**E. Gemini CLI (free, no API key)?**
+"Gemini CLI authenticates via your Google account — no API key, no cost. Install with: `npm install -g @google/gemini-cli` then: `gemini auth`"
+- Check: `which gemini 2>/dev/null && echo found || echo missing`
+- If found: record `GEMINI_BIN=$(which gemini)` — no API key needed
+- If not found and they want it: `npm install -g @google/gemini-cli` → `gemini auth`
+- Skip if they have at least 2 other agents
 
 Confirm with the user what agents they'll have. Show a summary like:
 ```
 Agents configured:
   ✅ Claude CLI — /path/to/claude
   ✅ Ollama (llama3.2) — http://localhost:11434
+  ✅ Gemini CLI — /opt/homebrew/bin/gemini (no API key)
   ❌ Codex — not available
-  ❌ Gemini — not configured
+  ❌ Beast remote — not configured
 ```
 
 ---
 
-## Step 4: Discord bot setup
+## Step 4: Discord bot setup (skip if TRANSPORT_CHOICE = "File")
 
 Tell the user: "Now we'll create a Discord bot. This takes about 5 minutes in the Discord Developer Portal."
 
@@ -143,6 +169,42 @@ Verify: "Is the bot now showing as a member of your server?"
    Record as `DISCORD_WEBHOOK_URL=...`
 3. Right-click the channel name → **Copy Channel ID** (need Developer Mode: User Settings → Advanced → Developer Mode)
    Record as `DISCORD_TASK_CHANNEL_ID=...`
+
+---
+
+## Step 4F: File transport setup (skip if TRANSPORT_CHOICE = "Discord")
+
+Tell the user:
+
+"File transport uses two markdown files:
+- **inbox.md** — you write questions here, one line per question, save the file
+- **conversation.md** — Agent Factory appends questions + answers here
+
+The service watches `inbox.md` for changes and clears it immediately when it picks up a message, so you always know it was received."
+
+Ask: "Where do you want this conversation folder? (default: `~/agent-chats`)"
+
+Record as `CONVERSATION_DIR` (default: `~/agent-chats`)
+
+Create the folder:
+```bash
+mkdir -p $CONVERSATION_DIR
+```
+
+Show them the command syntax for file mode:
+```
+Write to inbox.md:
+  Your question here                → auto-routed
+  !debate: topic                    → multi-agent debate
+  !claude: prompt                   → force Claude
+  !local: prompt                    → force local/Ollama
+  !gemini: prompt                   → force Gemini
+
+After a debate, to act on the proposal:
+  !approve                          → execute the proposed action
+  !reject                           → dismiss it
+  !ask: follow-up question          → ask agents to elaborate
+```
 
 ---
 
@@ -187,15 +249,24 @@ Now write the .env file based on everything collected:
 ```bash
 cat > $FACTORY_DIR/.env << 'ENVEOF'
 DATABASE_URL=[value]
+TRANSPORT=[discord|file|both based on TRANSPORT_CHOICE]
+
+# Discord (only if transport includes discord)
 DISCORD_BOT_TOKEN=[value]
 DISCORD_TASK_CHANNEL_ID=[value]
 DISCORD_WEBHOOK_URL=[value]
+
+# File transport (only if transport includes file)
+CONVERSATION_DIR=[value if configured]
+
+# Agents — only include lines for configured agents
 CLAUDE_BIN=[value if configured]
 CODEX_BIN=[value if configured]
 OLLAMA_URL=[value if configured]
 OLLAMA_MODEL=[value if configured]
 BEAST_URL=[value if configured]
-GEMINI_API_KEY=[value if configured]
+GEMINI_BIN=[value if configured]
+
 AGENT_ROUTER_ENABLED=1
 ENVEOF
 ```
@@ -210,9 +281,12 @@ Fill in only the values that were configured. Omit lines for agents they don't h
 cd $FACTORY_DIR && npm start
 ```
 
-Watch the output for:
+**For Discord transport**, watch for:
 - `[discord-bot] logged in as YourBotName#1234` ← success
 - Any error messages
+
+**For file transport**, watch for:
+- `[file-bot] watching inbox.md` ← success
 
 If there's a database connection error:
 - Check `DATABASE_URL` is correct
@@ -227,34 +301,46 @@ Once running, tell the user to keep this terminal open (or suggest running it in
 
 ## Step 8: First test
 
-"Let's test everything is working. Go to your Discord channel and type:"
-
+**Discord transport:**
+"Go to your Discord channel and type:"
 ```
 What is the capital of France?
 ```
+The bot should react with ⚡ and reply within 30 seconds.
 
-The bot should react with ⚡ and reply within 30 seconds with the answer from whatever agent is available.
+**File transport:**
+"Open `$CONVERSATION_DIR/inbox.md` and write:"
+```
+What is the capital of France?
+```
+Save the file. The inbox will clear immediately (picked up), and the answer will appear in `conversation.md` within 30 seconds.
 
-If it works: "Perfect! Now let's try a debate."
+If it works: "Now let's try a debate."
 
+**Discord:**
 ```
 !debate: Should I use Postgres or SQLite for a small side project?
 ```
 
-This will start a 2-agent debate (your first two configured agents), with one playing Red Team. Watch for the round-by-round embeds appearing. After ~2 minutes you'll get an embed with Approve/Reject buttons.
+**File (write to inbox.md):**
+```
+!debate: Should I use Postgres or SQLite for a small side project?
+```
+
+Watch for the debate to complete (2–4 minutes). You'll get a synthesis with a proposed action. In Discord: Approve/Reject buttons appear. In file mode: write `!approve` or `!reject` in inbox.md.
 
 ---
 
 ## Step 9: Teach them the commands
 
-Once the test succeeds, explain the command syntax:
+Once the test succeeds, explain the full command reference:
 
 ```
 What is X?                          → auto-routed to best available agent
 !claude: prompt                     → force Claude CLI
 !local: prompt                      → force local Ollama model
 !beast: prompt                      → force remote llama.cpp node
-!gemini: prompt                     → force Gemini
+!gemini: prompt                     → force Gemini CLI (free)
 !codex: prompt                      → queues for next Codex session (async)
 
 !debate: topic                      → 2-agent debate, default agents
@@ -263,7 +349,12 @@ What is X?                          → auto-routed to best available agent
 !debate claude vs local --red local: topic   → explicitly set Red Team agent
 ```
 
+**After a debate (Discord):** Approve / Reject / Ask buttons appear on the synthesis embed.
+**After a debate (file):** Write `!approve`, `!reject`, or `!ask: your follow-up` in inbox.md.
+
 Explain what Red Team means: "One agent always plays devil's advocate — attacks the dominant view to prevent echo chambers. By default it's your second agent."
+
+Explain auto-routing: "Boilerplate, summarize, and commit_msg tasks automatically go to your cheapest available agent (local model > Beast > Claude) to save API quota."
 
 ---
 
@@ -313,7 +404,9 @@ Tell them:
 - The service polls for new tasks every 10 seconds
 - Debates take 1-4 minutes depending on agents and rounds
 - Local models (Ollama) are slower but free and private
-- They can add more context hints by setting `CONTEXT_HINTS_JSON` in their .env
-- To add a project context: `CONTEXT_HINTS_JSON=[{"pattern":"myapp","context":"MyApp is a..."}]`
+- Gemini CLI is free via Google account auth — good second debater if you don't have Ollama
+- They can add context hints by setting `CONTEXT_HINTS_JSON` in their .env
+  - Example: `CONTEXT_HINTS_JSON=[{"pattern":"myapp","context":"MyApp is a..."}]`
+- To run both Discord and file at once: `TRANSPORT=both` in .env
 
-"You're all set! Type a question in Discord to get started."
+"You're all set. Ask it something hard."
