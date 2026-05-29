@@ -1,3 +1,4 @@
+// UNUSED — extracted for future reuse
 /**
  * @lns-skills/conversation-memory
  *

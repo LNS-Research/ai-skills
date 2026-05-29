@@ -1,3 +1,4 @@
+// UNUSED — extracted for future reuse
 /**
  * @lns-skills/action-items
  *
@@ -99,6 +100,10 @@ If no clear action items exist, return [].`;
           messages: [{ role: "user", content: userPrompt }],
         }),
       });
+      if (!response.ok) {
+        const e = await response.json().catch(() => ({})) as { error?: { message: string } };
+        throw new Error(e.error?.message ?? `Anthropic API error ${response.status}`);
+      }
       const data = await response.json() as { content?: { text?: string }[] };
       raw = data.content?.[0]?.text ?? "[]";
     } catch (err) {

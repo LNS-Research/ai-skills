@@ -1,3 +1,4 @@
+// UNUSED — extracted for future reuse
 /**
  * @lns-skills/hybrid-search
  *
@@ -99,6 +100,7 @@ async function hybridSearch(
 ): Promise<SearchResult[]> {
   const { query, limit = 10, filters = {} } = input;
   const embedding = await config.embedFn(query);
+  if (!embedding?.length) return [];
 
   const conditions: string[] = [];
   const params: unknown[] = [];

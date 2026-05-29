@@ -6,6 +6,7 @@
     "triage",
     "capture",
     "ai-router",
+    "continuity-core",
     "email-draft",
     "action-items",
     "conversation-memory",

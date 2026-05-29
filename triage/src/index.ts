@@ -1,3 +1,4 @@
+// UNUSED — extracted for future reuse
 /**
  * @lns-skills/triage
  *
@@ -214,6 +215,10 @@ ${JSON.stringify(summaries, null, 2)}`;
         messages: [{ role: "user", content: user }],
       }),
     });
+    if (!r.ok) {
+      const e = await r.json().catch(() => ({})) as { error?: { message: string } };
+      throw new Error(e.error?.message ?? `Anthropic API error ${r.status}`);
+    }
     const d = await r.json() as { content?: { text?: string }[] };
     return d.content?.[0]?.text?.trim() ?? "";
   }

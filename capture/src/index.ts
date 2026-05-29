@@ -1,3 +1,4 @@
+// UNUSED — extracted for future reuse
 /**
  * @lns-skills/capture
  *
@@ -66,8 +67,9 @@ export function createCapture(config: CaptureConfig) {
 
       const [embedding, extractedMeta] = await Promise.all([
         config.embedFn(content),
-        config.extractMetadataFn ? config.extractMetadataFn(content) : Promise.resolve({}),
+        config.extractMetadataFn ? config.extractMetadataFn(content).catch(() => ({})) : Promise.resolve({}),
       ]);
+      if (!embedding?.length) throw new Error("embedFn returned empty embedding");
 
       const metadata = { ...extractedMeta, ...extraMeta };
 
@@ -94,8 +96,9 @@ export function createCapture(config: CaptureConfig) {
 
       const [embedding, extractedMeta] = await Promise.all([
         config.embedFn(input.content),
-        config.extractMetadataFn ? config.extractMetadataFn(input.content) : Promise.resolve({}),
+        config.extractMetadataFn ? config.extractMetadataFn(input.content).catch(() => ({})) : Promise.resolve({}),
       ]);
+      if (!embedding?.length) throw new Error("embedFn returned empty embedding");
 
       const metadata = { ...extractedMeta, ...(input.metadata ?? {}) };
 

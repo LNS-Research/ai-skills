@@ -1,0 +1,22 @@
+{
+  "name": "@openbrain/continuity-core",
+  "version": "0.1.0",
+  "description": "Portable product logic for Continuity — brain injury, stroke, and cognitive support companion",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": {
+      "import": "./src/index.ts",
+      "types": "./src/index.ts"
+    }
+  },
+  "scripts": {
+    "build": "tsc",
+    "typecheck": "tsc --noEmit"
+  },
+  "keywords": ["recovery", "cognitive-support", "care-circle", "markdown-vault"],
+  "devDependencies": {
+    "typescript": "^5.8.3"
+  }
+}
