@@ -16,6 +16,7 @@ import { homedir } from "os";
 import pool from "./db.js";
 import { extractProposedAction } from "./debate.js";
 import { notifyQueued } from "./discord.js";
+import { buildIntentPrompt, classifyDiscordIntent } from "./discord-intents.js";
 
 const RAW_DIR = process.env.CONVERSATION_DIR ?? "./conversation";
 const CONVERSATION_DIR = RAW_DIR.startsWith("~")
@@ -106,8 +107,13 @@ function parseCommand(text: string): ParsedCommand | null {
   const agentMatch = content.match(/^!(beast|gemini|local|claude|codex|openai):\s*([\s\S]+)/i);
   if (agentMatch) return { to_agent: agentMatch[1].toLowerCase(), type: "chat", prompt: agentMatch[2].trim() };
 
+  const intent = classifyDiscordIntent(content);
+  if (intent === "board" || intent === "debate") {
+    return { to_agent: "auto", type: intent, prompt: content };
+  }
+
   // plain text → chat
-  return { to_agent: "auto", type: "chat", prompt: content };
+  return { to_agent: "auto", type: "chat", prompt: buildIntentPrompt(content) };
 }
 
 // ── Debate streaming handler ──────────────────────────────────────────────────
