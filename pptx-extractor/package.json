@@ -15,9 +15,17 @@
     "build": "tsc",
     "dev": "tsc --watch"
   },
-  "keywords": ["pptx", "powerpoint", "slides", "extract", "parse", "office", "research"],
+  "keywords": [
+    "pptx",
+    "powerpoint",
+    "slides",
+    "extract",
+    "parse",
+    "office",
+    "research"
+  ],
   "dependencies": {
-    "fflate": "^0.8"
+    "fflate": "^0.8.3"
   },
   "devDependencies": {
     "typescript": "^5"
